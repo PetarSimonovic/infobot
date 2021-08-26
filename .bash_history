@@ -26,3 +26,29 @@ ls
 nano  /etc/ssh/sshd_config
 sudo raspi-config
 logout
+pip install pymeeus
+nano calendardata.py
+python
+nano calendardata.py
+python
+nano calendardata.py
+python
+nano calendardata.py
+python
+nano calendardata.py
+git add .
+git commit -m "knows when the equinoxes and solstices take place"
+git push
+nano infobot.py
+python infobot.py
+nano calendardata.py
+python infobot.py
+nano calendardata.py
+python infobot.py
+nano calendardata.py
+python infobot.py
+nano infobot.py
+python infobot.py
+nano calendardata.py
+touch bank_holidays.py
+nano bank_holidays.py

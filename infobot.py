@@ -7,7 +7,7 @@ weather_report = weatherdata.fetch()
 
 calendar_report = calendardata.fetch()
 
-infostring = f'{calender_report}'
+infostring = f'{calendar_report} {weather_report}'
 print(infostring)
 
 
