@@ -1,12 +1,17 @@
+import os
+from dotenv import load_dotenv
 from requests import get
 from pprint import  pprint
 import json
 import datetime
 
 
-degree_sign = u"\N{DEGREE SIGN}"
-url = 'https://api.openweathermap.org/data/2.5/onecall?lat=51.45&lon=-0.07&units=metric&appid=2a023107a3b3e33aea09afb695430413'
+# weatherdata makes a call to the Open Weather API
+# Substitute the LATITUDE, LONGITUDE and YOUR_API_ID values in the url below
+# https://api.openweathermap.org/data/2.5/onecall?lat=<LATITUDE>&lon=<LONGITUDE>&units=metric&appid=<YOUR_API_ID>
 
+load_dotenv()
+url =  os.getenv('WEATHER_URL')
 
 def format_time(time):
 	return datetime.datetime.utcfromtimestamp(time).strftime('%H:%M:%S')

@@ -3,7 +3,7 @@ import weatherdata
 import scrollphathd as sphd
 import time
 
-#weather_report = weatherdata.fetch()
+weather_report = weatherdata.fetch()
 
 calendar_report = calendardata.fetch()
 
