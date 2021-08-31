@@ -1,10 +1,10 @@
+from pymeeus import Sun
+from pymeeus import Epoch
 import datetime
 from requests import get
 import json
 import pprint
 import random
-from pymeeus.Sun import Sun
-from pymeeus.Epoch import Epoch
 
 
 today = datetime.date.today()
@@ -100,3 +100,4 @@ def fetch():
         calendar_report = f'{day_data} {holiday} {holiday_message} {solstice}'
         print(calendar_report)
         return calendar_report
+

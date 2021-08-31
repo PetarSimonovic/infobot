@@ -12,6 +12,7 @@ print(infostring)
 
 
 sphd.write_string(infostring)
+sphd.set_brightness(0.3)
 
 while True:
 	sphd.show()

@@ -1,5 +1,5 @@
 import os
-from dotenv import load_dotenv
+import my_apis
 from requests import get
 from pprint import  pprint
 import json
@@ -10,8 +10,7 @@ import datetime
 # Substitute the LATITUDE, LONGITUDE and YOUR_API_ID values in the url below
 # https://api.openweathermap.org/data/2.5/onecall?lat=<LATITUDE>&lon=<LONGITUDE>&units=metric&appid=<YOUR_API_ID>
 
-load_dotenv()
-url =  os.getenv('WEATHER_URL')
+url = my_apis.weather_api()
 
 def format_time(time):
 	return datetime.datetime.utcfromtimestamp(time).strftime('%H:%M:%S')
@@ -26,8 +25,8 @@ def rain_forecast(rain_for_the_hour):
 	return("no rain expected")
 
 def get_temperature(current_weather):
-	current_temperature = "temperature: " + str(current_weather['temp']) + chr(176) 
-	feels_like = "feels like: " +  str(current_weather['feels_like']) + chr(176) 
+	current_temperature = f"temperature: {str(current_weather['temp'])}{chr(176)}C" 
+	feels_like = f"feels like: {str(current_weather['feels_like'])}{chr(176)}C" 
 	return current_temperature + " " + feels_like
 
 def calculate_moon(moon_phase):
@@ -81,7 +80,7 @@ def fetch():
 	misc_weather = get_misc_weather(weather_update['current'])
 	verbose_description = weather_description[0].get('description')
 	simple_description = weather_description[0].get('main')
-	weather_report = f'{verbose_description} {rain} {temperature} {sun_and_moon} + {misc_weather}'
+	weather_report = f'{verbose_description} {rain} {temperature} {sun_and_moon} {misc_weather}'
 	pprint(weather_report)
 	return weather_report
 
