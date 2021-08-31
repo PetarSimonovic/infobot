@@ -66,7 +66,7 @@ def get_misc_weather(weather):
 	visibility = weather.get('visibility')
 	wind_speed = weather.get('wind_speed')
 	clouds = weather.get('clouds')
-	return f'UV index: {uvi} humidity: {humidity}% dew point: {dew_point}{chr(176)} wind_speed: {wind_speed} atmospheric pressure at sea level {pressure}hPa visibility: {visibility} metres cloud cover: {clouds}%'
+	return f'UV index: {uvi} -  humidity: {humidity}% - dew point: {dew_point}{chr(176)} - wind speed: {wind_speed} - atmospheric pressure: {pressure}hPa - visibility: {visibility} metres - cloud cover: {clouds}%'
 
 
 
@@ -80,7 +80,7 @@ def fetch():
 	misc_weather = get_misc_weather(weather_update['current'])
 	verbose_description = weather_description[0].get('description')
 	simple_description = weather_description[0].get('main')
-	weather_report = f'{verbose_description} {rain} {temperature} {sun_and_moon} {misc_weather}'
+	weather_report = f'{verbose_description} - {rain} - {temperature} - {sun_and_moon} - {misc_weather} '
 	pprint(weather_report)
 	return weather_report
 

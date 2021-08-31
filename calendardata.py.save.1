@@ -1,54 +1,61 @@
-from pymeeus.Sun import Sun
+from pymeeus import Sun
+from pymeeus import Epoch
 import datetime
 from requests import get
 import json
 import pprint
 import random
 
+
+today = datetime.date.today()
+day  = today.strftime("%d")
+month = today.strftime("%m")
+month_name = today.strftime("%B")
+year = today.strftime("%Y")
+day_name = today.strftime('%A')
+today_date = f'{year}{month}{day}'
+day_data = f'{day_name} {day} {month_name} {year}'
 bank_holidays_API = get('https://www.gov.uk/bank-holidays.json').json()
 
-def calculate_solstice(target, event, day):
+
+def calculate_solstice(target):
 	year = datetime.datetime.now().year
 	solstice = Sun.get_equinox_solstice(year, target=target)
 	y, m, d, h, mi, s = solstice.get_full_date(utc=True)
+	solstice_date = (f'{y}{m}{d}')
 	solstice_day = f'{d}'
+	print(solstice_date)
+	solstice_time = (f'at {h}:{mi}')
+	print(solstice_time)
+	print(today_date)
+	print(day + solstice_day)
+	print(month)
 	if solstice_day == day:
-		print("It's a solstice or equinox")
-		print(h)
-		print(mi)
-		solstice_time = f'at {h}:{mi}'
-		solstice_text = (f'the {target} {event} will take place today at {solstice_time} UTC')
-		return solstice_text
-	else:	
-		return ""
+		return solstice_time
 
-def get_solstice(month, day):
-	if month == "03": 
-		return calculate_solstice("spring", "equinox", day)
-	elif month == "06": 
-		return calculate_solstice("summer", "solstice", day)
-	elif month == "09": 
-		return calculate_solstice("autumn", "equinox", day)
+def get_solstice():
+	if month == "03":
+		return f'the vernal equinox will take place today at {calculate_soltice("spring")} UTC'
+	elif month == "06":
+		return f'the summer solstice will take place today at {calculate_solstice("summer")} UTC'
+	elif month == "09":
+		return f'the autumnal equinox will take place today at {calculate_solstice("autumn")} UTC'
 	elif month == "12":
-		return calculate_solstice("winter", 'solstice', day)
+		return f'the winter solstice will take place today at {calculate_solstice("winter")} UTC'
 	else:
 		return ""
 
 def get_bank_holiday(today):
 	print(today)
-	year = datetime.datetime.now().year
 	if today == f'{year}-10-31':
 		return "Halloween"
 	elif today == f'{year}-12-24':
 		return "Christmas Eve"
-	elif today == f'{year}-12-25':
-		return "Christmas Day"
 	elif today == f'{year}-08-08':
 		return "International Cat Day"
 	bank_holidays = bank_holidays_API.get('england-and-wales')
 	events = bank_holidays.get('events')
 	for event in events:
-		print(event['date'])
 		if event['date'] == today:
 			return event['title']
 	return ""
@@ -84,3 +91,13 @@ def get_holiday_message(holiday):
 		return f"Happy New Year have a great {year}"
 	else:
 		return ""
+
+def fetch():
+        holiday = get_bank_holiday(f'{year}-{month}-{day}')
+        holiday_message = get_holiday_message(holiday)
+        day_data = f'{day_name} {day} {month_name} {year}'
+        solstice = get_solstice()
+        calendar_report = f'{day_data} {holiday} {holiday_message} {solstice}'
+        print(calendar_report)
+        return calendar_report
+
