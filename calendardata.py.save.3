@@ -1,4 +1,5 @@
-from pymeeus.Sun import Sun
+from pymeeus import Sun
+from pymeeus import Epoch
 import datetime
 from requests import get
 import json
@@ -7,30 +8,26 @@ import random
 
 bank_holidays_API = get('https://www.gov.uk/bank-holidays.json').json()
 
-def calculate_solstice(target, event, day):
+
+def calculate_solstice(target):
 	year = datetime.datetime.now().year
 	solstice = Sun.get_equinox_solstice(year, target=target)
 	y, m, d, h, mi, s = solstice.get_full_date(utc=True)
+	solstice_date = (f'{y}{m}{d}')
 	solstice_day = f'{d}'
+	solstice_time = (f'{h}:{mi}')
 	if solstice_day == day:
-		print("It's a solstice or equinox")
-		print(h)
-		print(mi)
-		solstice_time = f'at {h}:{mi}'
-		solstice_text = (f'the {target} {event} will take place today at {solstice_time} UTC')
-		return solstice_text
-	else:	
-		return ""
+		return solstice_time
 
-def get_solstice(month, day):
-	if month == "03": 
-		return calculate_solstice("spring", "equinox", day)
-	elif month == "06": 
-		return calculate_solstice("summer", "solstice", day)
-	elif month == "09": 
-		return calculate_solstice("autumn", "equinox", day)
+def get_solstice():
+	if month == "03":
+		return fthe vernal equinox will take place today at {calculate_soltice("spring")} UTC'
+	elif month == "06":
+		return f'the summer solstice will take place today at {calculate_solstice("summer")} UTC'
+	elif month == "09":
+		return f'the autumnal equinox will take place today at {calculate_solstice("autumn")} UTC'
 	elif month == "12":
-		return calculate_solstice("winter", 'solstice', day)
+		return f'the winter solstice will take place today at {calculate_solstice("winter")} UTC'
 	else:
 		return ""
 
@@ -45,9 +42,12 @@ def get_bank_holiday(today):
 		return "Christmas Day"
 	elif today == f'{year}-08-08':
 		return "International Cat Day"
+	elif today == f'{year}-01-01':
+		return "New Year's Day"
 	bank_holidays = bank_holidays_API.get('england-and-wales')
 	events = bank_holidays.get('events')
 	for event in events:
+		print(event['date'])
 		if event['date'] == today:
 			return event['title']
 	return ""

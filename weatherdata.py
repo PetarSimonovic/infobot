@@ -48,7 +48,6 @@ def calculate_moon(moon_phase):
 		return 'waning crescent'  
 
 def get_sun_and_moon(daily_weather):
-	pprint("DAILY")
 	daily_data = daily_weather[0]
 	sunrise = format_time(daily_data['sunrise'])
 	sunset = format_time(daily_data['sunset'])
@@ -58,7 +57,6 @@ def get_sun_and_moon(daily_weather):
 	return f'sunrise: {sunrise} sunset {sunset} moonrise {moonrise} moonset {moonset} moon phase: {moon_phase}'
 
 def get_misc_weather(weather):
-	pprint(weather)
 	uvi = weather.get('uvi')
 	humidity = weather.get('humidity')
 	dew_point = weather.get('dew_point')
@@ -81,7 +79,6 @@ def fetch():
 	verbose_description = weather_description[0].get('description')
 	simple_description = weather_description[0].get('main')
 	weather_report = f'{verbose_description} - {rain} - {temperature} - {sun_and_moon} - {misc_weather} '
-	pprint(weather_report)
 	return weather_report
 
 
