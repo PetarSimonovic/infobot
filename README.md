@@ -1,4 +1,4 @@
-#InfoBot
+# InfoBot
 
 InfoBot is an information-spouting robot designed for the Raspberry Pi Zero W.
 
